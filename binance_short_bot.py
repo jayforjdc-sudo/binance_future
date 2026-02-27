@@ -17,6 +17,7 @@ import numpy as np
 from binance.client import Client
 from binance.exceptions import BinanceAPIException, BinanceOrderException
 from indicators import RSI, MACD, SMA, EMA, BBANDS, ATR
+from telegram_notifier import TelegramNotifier
 
 # .env 파일 로드
 load_dotenv()
@@ -30,7 +31,11 @@ class BotConfig:
     # API 설정
     API_KEY = os.getenv('BINANCE_API_KEY', '')
     API_SECRET = os.getenv('BINANCE_API_SECRET', '')
-    
+
+    # Telegram 알림 설정
+    TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN', '')
+    TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID', '')
+
     # 거래 설정
     INITIAL_BALANCE = 100  # USDT
     LEVERAGE = 2  # 초기 레버리지 (2~3배 권장)
