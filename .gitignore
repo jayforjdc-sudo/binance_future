@@ -33,6 +33,11 @@ ENV/
 .cache/
 *.cache
 
+# AWS & Keys
+*.pem
+*.key
+*.ppk
+
 # OS
 .DS_Store
 Thumbs.db
