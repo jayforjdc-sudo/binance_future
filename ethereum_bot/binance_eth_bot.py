@@ -1,6 +1,6 @@
 """
-Binance Futures BTC Trading Bot
-청산 위험을 최소화한 보수적 BTC 봇 (SHORT/LONG 선택형)
+Binance Futures ETH Trading Bot
+청산 위험을 최소화한 보수적 ETH 봇 (SHORT/LONG 선택형)
 """
 
 import os
@@ -16,8 +16,11 @@ import pandas as pd
 import numpy as np
 from binance.client import Client
 from binance.exceptions import BinanceAPIException, BinanceOrderException
-from indicators import RSI, MACD, SMA, EMA, BBANDS, ATR, find_pivots, detect_bearish_divergence, detect_bullish_divergence
-from telegram_notifier import TelegramNotifier
+from sys import path as sys_path
+from pathlib import Path
+sys_path.insert(0, str(Path(__file__).parent.parent))
+from shared.indicators import RSI, MACD, SMA, EMA, BBANDS, ATR, find_pivots, detect_bearish_divergence, detect_bullish_divergence
+from shared.telegram_notifier import TelegramNotifier
 
 # .env 파일 로드
 load_dotenv()
@@ -37,7 +40,7 @@ class BotConfig:
     TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID', '')
 
     # 거래 설정
-    INITIAL_BALANCE = 100  # USDT
+    INITIAL_BALANCE = 50  # USDT (ETH는 BTC보다 비싸므로 낮게 설정)
     LEVERAGE = 2  # 초기 레버리지 (2~3배 권장)
     MAX_LEVERAGE = 5  # 최대 레버리지
     
@@ -71,7 +74,7 @@ class BotConfig:
     MACD_SIGNAL = 9
     
     # 거래쌍
-    SYMBOLS = ['BTCUSDT']  # BTCUSDT만 거래 (검증됨)
+    SYMBOLS = ['ETHUSDT']  # ETHUSDT만 거래
     
     # 시간 설정
     TIMEFRAME = '1h'  # 1시간 봉
@@ -89,7 +92,7 @@ class BotConfig:
 # ============================================================================
 
 def setup_logger():
-    logger = logging.getLogger('BinanceBTCBot')
+    logger = logging.getLogger('BinanceETHBot')
     logger.setLevel(BotConfig.LOG_LEVEL)
     
     # 파일 로그
@@ -117,7 +120,7 @@ logger = setup_logger()
 # 트레이딩 엔진
 # ============================================================================
 
-class BinanceBTCBot:
+class BinanceETHBot:
     def __init__(self):
         """봇 초기화"""
         self.client = Client(BotConfig.API_KEY, BotConfig.API_SECRET)
@@ -1062,7 +1065,7 @@ if __name__ == "__main__":
             exit(1)
         
         # 봇 시작
-        bot = BinanceBTCBot()
+        bot = BinanceETHBot()
 
         # 테스트 모드로 실행 (실제 거래 안 함)
         bot.run(test_mode=False)

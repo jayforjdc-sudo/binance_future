@@ -10,7 +10,10 @@ from datetime import datetime, timedelta
 from binance.client import Client
 import matplotlib.pyplot as plt
 from typing import Dict, List, Tuple
-from indicators import RSI, MACD, SMA, EMA, BBANDS, ATR
+from sys import path as sys_path
+from pathlib import Path
+sys_path.insert(0, str(Path(__file__).parent.parent))
+from shared.indicators import RSI, MACD, SMA, EMA, BBANDS, ATR
 
 logger = logging.getLogger('BinanceBacktest')
 
