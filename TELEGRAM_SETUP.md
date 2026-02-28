@@ -11,7 +11,7 @@ Binance Bot 거래 알림을 Telegram으로 받기
 1. Telegram 앱 또는 웹 열기
 2. [@BotFather](https://t.me/botfather) 검색 후 시작
 3. `/newbot` 입력
-4. 봇 이름 입력 (예: `BinanceShortBot`)
+4. 봇 이름 입력 (예: `BinanceBTCBot`)
 5. 봇 사용자명 입력 (예: `binance_short_bot`)
 6. **Bot Token 복사** 📋
 
@@ -310,7 +310,7 @@ API 연결 오류: Connection timeout
 ☐ Chat ID 확인
 ☐ .env 파일에 Token과 Chat ID 입력
 ☐ 테스트 메시지 확인
-☐ 봇 실행 (python3 binance_short_bot.py)
+☐ 봇 실행 (python3 binance_btc_bot.py)
 ☐ 첫 거래 알림 대기 중!
 ```
 

@@ -74,14 +74,14 @@ python3 test_bot.py
 
 ```bash
 # 테스트 모드 (실제 거래 안 함)
-python3 -c "from binance_short_bot import BinanceShortBot; bot = BinanceShortBot(); bot.run(test_mode=True)"
+python3 -c "from binance_btc_bot import BinanceBTCBot; bot = BinanceBTCBot(); bot.run(test_mode=True)"
 ```
 
 ### 5. 실제 거래 시작
 
 ```bash
 # 100달러 이하로만 거래하도록 설정 후:
-python3 binance_short_bot.py
+python3 binance_btc_bot.py
 ```
 
 ---
@@ -90,7 +90,7 @@ python3 binance_short_bot.py
 
 ```
 binance-short-bot/
-├── binance_short_bot.py      # 메인 봇 엔진
+├── binance_btc_bot.py        # 메인 봇 엔진 (SHORT/LONG 선택형)
 ├── backtest_engine.py        # 백테스팅 모듈
 ├── test_bot.py               # 검증 스크립트
 ├── requirements.txt          # Python 의존성

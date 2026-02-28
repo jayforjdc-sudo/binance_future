@@ -78,3 +78,81 @@ def ATR(high, low, close, period=14):
     atr = pd.Series(tr).rolling(window=period).mean().values
 
     return atr
+
+
+def find_pivots(arr, order=5):
+    """
+    로컬 고점/저점 인덱스 탐지 (RSI 다이버전스용)
+
+    Parameters:
+    - arr: 1D numpy array 또는 list (가격 또는 RSI)
+    - order: 고점/저점 좌우로 필요한 캔들 수 (확인용)
+
+    Returns:
+    - (pivot_highs, pivot_lows) - 각각 [(index, value), ...] 리스트
+    """
+    arr = np.asarray(arr, dtype=float)
+    n = len(arr)
+    pivot_highs, pivot_lows = [], []
+
+    for i in range(order, n - order):
+        window = arr[i - order: i + order + 1]
+        # NaN 무시하고 비교
+        if arr[i] == np.nanmax(window):
+            pivot_highs.append((i, arr[i]))
+        if arr[i] == np.nanmin(window):
+            pivot_lows.append((i, arr[i]))
+
+    return pivot_highs, pivot_lows
+
+
+def detect_bearish_divergence(price_highs, rsi_highs):
+    """
+    Bearish Divergence 감지 (RSI 다이버전스)
+
+    조건: 가격은 신고가 갱신하지만 RSI는 신고가 미갱신
+    의미: 상승 모멘텀 약화 → 하락 반전 신호
+
+    Parameters:
+    - price_highs: find_pivots()로 반환된 가격 피벗 고점 리스트
+    - rsi_highs: find_pivots()로 반환된 RSI 피벗 고점 리스트
+
+    Returns:
+    - True: 베어리쉬 다이버전스 감지
+    - False: 다이버전스 없음
+    """
+    if len(price_highs) < 2 or len(rsi_highs) < 2:
+        return False
+
+    # 가장 최근 두 피벗 비교
+    price_prev_val, price_last_val = price_highs[-2][1], price_highs[-1][1]
+    rsi_prev_val,   rsi_last_val   = rsi_highs[-2][1],   rsi_highs[-1][1]
+
+    # 가격은 올랐지만 RSI는 내려감 = 베어리쉬 다이버전스
+    return price_last_val > price_prev_val and rsi_last_val < rsi_prev_val
+
+
+def detect_bullish_divergence(price_lows, rsi_lows):
+    """
+    Bullish Divergence 감지 (RSI 다이버전스)
+
+    조건: 가격은 신저가 갱신하지만 RSI는 신저가 미갱신
+    의미: 하락 모멘텀 약화 → 상승 반전 신호
+
+    Parameters:
+    - price_lows: find_pivots()로 반환된 가격 피벗 저점 리스트
+    - rsi_lows: find_pivots()로 반환된 RSI 피벗 저점 리스트
+
+    Returns:
+    - True: 불리시 다이버전스 감지
+    - False: 다이버전스 없음
+    """
+    if len(price_lows) < 2 or len(rsi_lows) < 2:
+        return False
+
+    # 가장 최근 두 피벗 비교
+    price_prev_val, price_last_val = price_lows[-2][1], price_lows[-1][1]
+    rsi_prev_val,   rsi_last_val   = rsi_lows[-2][1],   rsi_lows[-1][1]
+
+    # 가격은 내렸지만 RSI는 올라감 = 불리시 다이버전스
+    return price_last_val < price_prev_val and rsi_last_val > rsi_prev_val

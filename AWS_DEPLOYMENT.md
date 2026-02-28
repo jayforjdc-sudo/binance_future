@@ -103,7 +103,7 @@ sudo apt install -y tmux
 tmux new-session -d -s binance_bot
 
 # 봇 실행
-tmux send-keys -t binance_bot "cd ~/binance_future && source venv/bin/activate && python3 binance_short_bot.py" Enter
+tmux send-keys -t binance_bot "cd ~/binance_future && source venv/bin/activate && python3 binance_btc_bot.py" Enter
 
 # 세션 확인
 tmux list-sessions
@@ -131,7 +131,7 @@ Type=simple
 User=ubuntu
 WorkingDirectory=/home/ubuntu/binance_future
 Environment="PATH=/home/ubuntu/binance_future/venv/bin"
-ExecStart=/home/ubuntu/binance_future/venv/bin/python3 binance_short_bot.py
+ExecStart=/home/ubuntu/binance_future/venv/bin/python3 binance_btc_bot.py
 Restart=always
 RestartSec=10
 

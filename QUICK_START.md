@@ -38,7 +38,7 @@ python3 test_bot.py
 
 **테스트 모드** (권장):
 ```bash
-python3 binance_short_bot.py
+python3 binance_btc_bot.py
 ```
 
 로그 확인:
@@ -50,7 +50,7 @@ tail -f bot_trading.log
 
 ## 🎯 기본 설정
 
-`binance_short_bot.py`의 `BotConfig` 수정:
+`binance_btc_bot.py`의 `BotConfig` 수정:
 
 ```python
 class BotConfig:
@@ -153,7 +153,7 @@ pip install ta-lib --binary-only
 
 | 파일 | 용도 |
 |------|------|
-| `binance_short_bot.py` | 메인 봇 |
+| `binance_btc_bot.py` | 메인 봇 (SHORT/LONG 선택형) |
 | `backtest_engine.py` | 백테스팅 |
 | `test_bot.py` | 검증 도구 |
 | `INSTALLATION_GUIDE.md` | 자세한 설치 |

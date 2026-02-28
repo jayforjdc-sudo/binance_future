@@ -75,7 +75,7 @@ $env:BINANCE_API_SECRET="your_api_secret"
 **방법 3: 코드에서 설정 (개발용만)**
 
 ```python
-# binance_short_bot.py 수정
+# binance_btc_bot.py 수정
 API_KEY = 'your_api_key'
 API_SECRET = 'your_api_secret'
 ```
@@ -223,7 +223,7 @@ stats, trades = run_backtest('ETHUSDT', days=60)
 
 ```bash
 # 테스트 모드로 실행
-python3 binance_short_bot.py --test
+python3 binance_btc_bot.py --test
 
 # 또는 코드에서:
 bot.run(test_mode=True)
@@ -233,7 +233,7 @@ bot.run(test_mode=True)
 
 ```bash
 # 100달러 이하로만 거래하도록 설정 후:
-python3 binance_short_bot.py
+python3 binance_btc_bot.py
 
 # 또는 코드에서:
 bot.run(test_mode=False)

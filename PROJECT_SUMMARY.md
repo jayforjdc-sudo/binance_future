@@ -3,7 +3,7 @@
 ## 📦 제공 파일
 
 ### 코어 파일
-- **`binance_short_bot.py`** (25KB)
+- **`binance_btc_bot.py`** (25KB)
   - 메인 거래 봇
   - 포지션 관리, 신호 분석, 위험 관리
   - 자동 청산, 손절매/익절 기능
@@ -77,7 +77,7 @@ echo "BINANCE_API_SECRET=your_secret" >> .env
 
 ### 3단계: 실행 (1분)
 ```bash
-python3 binance_short_bot.py
+python3 binance_btc_bot.py
 ```
 
 ---
@@ -137,7 +137,7 @@ MACD < Signal (약세)?
 ### 1단계: 이해하기 (1시간)
 1. `README.md` 읽기
 2. `QUICK_START.md` 숙독
-3. 코드 구조 파악 (`binance_short_bot.py`)
+3. 코드 구조 파악 (`binance_btc_bot.py`)
 
 ### 2단계: 검증하기 (1일)
 1. `test_bot.py` 실행
