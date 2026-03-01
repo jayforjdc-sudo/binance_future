@@ -45,7 +45,7 @@ class BotConfig:
     MAX_LEVERAGE = 5  # 최대 레버리지
 
     # 포지션 사이징
-    POSITION_SIZE_PERCENT = 0.10  # 계좌의 10% 사용 (15% → 10%으로 낮춤)
+    POSITION_SIZE_PERCENT = 0.25  # 계좌의 25% 사용 (최소 주문량 충족)
     
     # 손절매/이익실현
     STOP_LOSS_PERCENT = 2.0  # 진입가 대비 손절매 %
