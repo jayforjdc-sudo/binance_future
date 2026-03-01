@@ -40,12 +40,12 @@ class BotConfig:
     TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID', '')
 
     # 거래 설정
-    INITIAL_BALANCE = 100  # USDT
-    LEVERAGE = 2  # 초기 레버리지 (2~3배 권장)
+    INITIAL_BALANCE = 40  # USDT (50달러 중 안전 마진 포함)
+    LEVERAGE = 2  # 초기 레버리지 (2배 - 보수적)
     MAX_LEVERAGE = 5  # 최대 레버리지
-    
+
     # 포지션 사이징
-    POSITION_SIZE_PERCENT = 0.15  # 계좌의 15% 사용
+    POSITION_SIZE_PERCENT = 0.10  # 계좌의 10% 사용 (15% → 10%으로 낮춤)
     
     # 손절매/이익실현
     STOP_LOSS_PERCENT = 2.0  # 진입가 대비 손절매 %
@@ -371,7 +371,7 @@ class BinanceBTCBot:
             logger.info(f"  ⚡ RSI 베어리쉬 다이버전스 감지!")
 
         confidence = signal_score / max_score
-        if confidence >= 0.50:
+        if confidence >= 0.35:
             return 'SHORT', min(confidence, 1.0)
         else:
             return 'HOLD', confidence
@@ -414,7 +414,7 @@ class BinanceBTCBot:
             logger.info(f"  ⚡ RSI 불리시 다이버전스 감지!")
 
         confidence = signal_score / max_score
-        if confidence >= 0.50:
+        if confidence >= 0.35:
             return 'LONG', min(confidence, 1.0)
         else:
             return 'HOLD', confidence
@@ -1012,7 +1012,7 @@ class BinanceBTCBot:
                     logger.info(f"  신호: {signal} (확률: {confidence*100:.1f}%)")
 
                     # 신호에 따른 거래 (자동 모드 전환 시 self.current_mode 사용)
-                    if signal == 'SHORT' and confidence >= 0.50 and self.current_mode == 'SHORT':
+                    if signal == 'SHORT' and confidence >= 0.35 and self.current_mode == 'SHORT':
                         logger.info(f"  ✅ 숏 진입 신호 감지!")
 
                         # 테스트 모드가 아닌 경우만 실제 거래
@@ -1023,7 +1023,7 @@ class BinanceBTCBot:
                         else:
                             logger.info(f"  [테스트 모드] 실제 거래 미실행")
 
-                    elif signal == 'LONG' and confidence >= 0.50 and self.current_mode == 'LONG':
+                    elif signal == 'LONG' and confidence >= 0.35 and self.current_mode == 'LONG':
                         logger.info(f"  ✅ 롱 진입 신호 감지!")
 
                         # 테스트 모드가 아닌 경우만 실제 거래
