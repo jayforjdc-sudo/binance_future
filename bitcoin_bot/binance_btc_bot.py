@@ -41,11 +41,11 @@ class BotConfig:
 
     # 거래 설정
     INITIAL_BALANCE = 40  # USDT (50달러 중 안전 마진 포함)
-    LEVERAGE = 2  # 초기 레버리지 (2배 - 보수적)
+    LEVERAGE = 3  # 초기 레버리지 (3배 - 테스트용)
     MAX_LEVERAGE = 5  # 최대 레버리지
 
     # 포지션 사이징
-    POSITION_SIZE_PERCENT = 0.25  # 계좌의 25% 사용 (최소 주문량 충족)
+    POSITION_SIZE_PERCENT = 0.05  # 계좌의 5% 사용 (최소 주문량 충족 시도)
     
     # 손절매/이익실현
     STOP_LOSS_PERCENT = 2.0  # 진입가 대비 손절매 %
