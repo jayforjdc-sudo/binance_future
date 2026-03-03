@@ -371,7 +371,7 @@ class BinanceBTCBot:
             logger.info(f"  ⚡ RSI 베어리쉬 다이버전스 감지!")
 
         confidence = signal_score / max_score
-                if confidence >= 0.25:
+        if confidence >= 0.25:
             return 'SHORT', min(confidence, 1.0)
         else:
             return 'HOLD', confidence
